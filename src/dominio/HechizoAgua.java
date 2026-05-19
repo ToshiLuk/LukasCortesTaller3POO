@@ -12,5 +12,11 @@ public class HechizoAgua extends Hechizo{
 	public double calcularPuntuacion() {
 		return (this.daño + this.cantHeal + this.presionAgua)*2;
 	}
+	public int getCantHeal() {
+		return cantHeal;
+	}
+	public int getPresionAgua() {
+		return presionAgua;
+	}
 	
 }

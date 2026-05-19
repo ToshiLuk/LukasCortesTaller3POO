@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Mago {
 	private String nombre;
 	private ArrayList<Hechizo> hechizos;
-	public Mago(String nombre, ArrayList<Hechizo> hechizos) {
+	public Mago(String nombre) {
 		this.nombre = nombre;
 		this.hechizos = new ArrayList<>();
 	}

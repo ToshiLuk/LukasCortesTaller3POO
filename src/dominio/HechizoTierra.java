@@ -11,5 +11,9 @@ public class HechizoTierra extends Hechizo{
 	public double calcularPuntuacion() {
 		return (this.daño * this.mejoraDefensa)/2;
 	}
+
+	public int getMejoraDefensa() {
+		return mejoraDefensa;
+	}
 	
 }

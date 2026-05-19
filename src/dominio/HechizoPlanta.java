@@ -13,5 +13,13 @@ public class HechizoPlanta extends Hechizo{
 	public double calcularPuntuacion() {
 		return this.daño + (this.duracionStun * this.cantPlanta);
 	}
+
+	public int getDuracionStun() {
+		return duracionStun;
+	}
+
+	public int getCantPlanta() {
+		return cantPlanta;
+	}
 	
 }

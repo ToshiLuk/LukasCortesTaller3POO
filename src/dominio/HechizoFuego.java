@@ -11,4 +11,9 @@ public class HechizoFuego extends Hechizo{
 	public double calcularPuntuacion() {
 		return this.daño * this.duracionQuemadura;
 	}
+
+	public int getDuracionQuemadura() {
+		return duracionQuemadura;
+	}
+	
 }
