@@ -28,5 +28,4 @@ public abstract class Hechizo {
 	public void setDaño(int daño) {
 		this.daño = daño;
 	}
-	
 }
