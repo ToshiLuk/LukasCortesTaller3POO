@@ -76,12 +76,13 @@ public class SistemaImp implements Sistema {
 				Mago mago = new Mago(nombre);
 				String[] partesHechizos = partes[1].split("\\|");
 				for (int i = 0; i < partesHechizos.length; i++) {
-					String nombreHechizo = partesHechizos[i];// Para una cantidad i de hechizos y evitar error
-																// IndexOutOfBounds
-					mago.getHechizos().add(buscarHechizo(nombreHechizo));// Buscamos el hechizo y se agrega el hechizo a
-																			// la lista del mago
+					// Para una cantidad i de hechizos y evitar error IndexOutOfBounds 
+					String nombreHechizo = partesHechizos[i];
+					// Buscamos el hechizo y se agrega el hechizo a la lista del mago
+					mago.getHechizos().add(buscarHechizo(nombreHechizo));
 				}
-				listaMagos.add(mago);// Agregamos el mago a la lista de magos
+				// Agregamos el mago a la lista de magos
+				listaMagos.add(mago);
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("No se encontró el archivo Magos.txt");
@@ -90,8 +91,8 @@ public class SistemaImp implements Sistema {
 	}
 
 	@Override
-	public Hechizo buscarHechizo(String nombreHechizo) {// Buscamos el hechizo por nombre en nuestra lista de hechizos
-														// que ya hicimos con el txt
+	public Hechizo buscarHechizo(String nombreHechizo) {
+		// Buscamos el hechizo por nombre en nuestra lista de hechizos que ya hicimos con el txt											
 		for (Hechizo h : listaHechizos) {
 			if (h.getNombre().equalsIgnoreCase(nombreHechizo)) {
 				return h;
