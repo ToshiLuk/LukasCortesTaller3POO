@@ -1,7 +1,9 @@
 package logica;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -67,17 +69,19 @@ public class SistemaImp implements Sistema {
 		try {
 			File arch = new File("datos/Magos.txt");
 			lector = new Scanner(arch);
-			while(lector.hasNextLine()) {
+			while (lector.hasNextLine()) {
 				String linea = lector.nextLine();
 				String[] partes = linea.split(";");
 				String nombre = partes[0].strip();
 				Mago mago = new Mago(nombre);
 				String[] partesHechizos = partes[1].split("\\|");
-				for (int i = 0; i<partesHechizos.length; i++) {
-					String nombreHechizo = partesHechizos[i];//Para una cantidad i de hechizos y evitar error IndexOutOfBounds
-					mago.getHechizos().add(buscarHechizo(nombreHechizo));//Buscamos el hechizo y se agrega el hechizo a la lista del mago
+				for (int i = 0; i < partesHechizos.length; i++) {
+					String nombreHechizo = partesHechizos[i];// Para una cantidad i de hechizos y evitar error
+																// IndexOutOfBounds
+					mago.getHechizos().add(buscarHechizo(nombreHechizo));// Buscamos el hechizo y se agrega el hechizo a
+																			// la lista del mago
 				}
-				listaMagos.add(mago);//Agregamos el mago a la lista de magos 
+				listaMagos.add(mago);// Agregamos el mago a la lista de magos
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("No se encontró el archivo Magos.txt");
@@ -86,13 +90,39 @@ public class SistemaImp implements Sistema {
 	}
 
 	@Override
-	public Hechizo buscarHechizo(String nombreHechizo) {//Buscamos el hechizo por nombre en nuestra lista de hechizos que ya hicimos con el txt
-		for(Hechizo h : listaHechizos) {
-			if (h.getNombre().equalsIgnoreCase(nombreHechizo)) { 
-				return h; 
+	public Hechizo buscarHechizo(String nombreHechizo) {// Buscamos el hechizo por nombre en nuestra lista de hechizos
+														// que ya hicimos con el txt
+		for (Hechizo h : listaHechizos) {
+			if (h.getNombre().equalsIgnoreCase(nombreHechizo)) {
+				return h;
 			}
 		}
-		return null; 
+		return null;
 	}
-	
+
+	@Override
+	public boolean agregarMago(String nombreMago) {
+		for (Mago m : listaMagos) {// Comprobamos si ya existe un mago con este nombre
+			if (m.getNombre().equalsIgnoreCase(nombreMago)) {
+				return false;//Si hay un mago con el mismo nombre se cierra el metodo
+			}
+		}
+		//No hay nombres repetidos cuando se pasa aqui
+		Mago magoNuevo = new Mago(nombreMago);
+		listaMagos.add(magoNuevo);
+		//Guardar en Magos.txt
+		try {
+			File arch = new File("datos/Magos.txt");
+			//True para que agregue texto en vez de sobreescribir
+			FileWriter fw = new FileWriter(arch, true);
+			BufferedWriter writer = new BufferedWriter(fw);
+			writer.newLine();
+			writer.write(nombreMago + ";");
+			writer.close();
+		} catch (Exception e) {
+			System.out.println("Error: No se pudo guardar en Magos.txt");
+			return false;
+		}
+		return true;//Todo bem
+	}
 }
