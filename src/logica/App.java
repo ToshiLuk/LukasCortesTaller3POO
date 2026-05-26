@@ -2,6 +2,9 @@ package logica;
 
 import java.util.Scanner;
 
+import dominio.Hechizo;
+import dominio.Mago;
+
 public class App {
 	public static Scanner sc = new Scanner(System.in);
 
@@ -10,6 +13,8 @@ public class App {
 		int opcionMenu = 0;
 		boolean opcionValida = false;
 		Sistema sistema = new SistemaImp();
+		sistema.guardarHechizos();
+		sistema.guardarMagos();
 		do {
 			do {
 				System.out.println("Menus:");
@@ -32,7 +37,7 @@ public class App {
 			} while (!opcionValida);
 
 			switch (opcion) {
-			case 1://Administrador
+			case 1:// Administrador
 				System.out.println("\n1. Agregar Mago");
 				System.out.println("2. Modificar Mago");
 				System.out.println("3. Eliminar Mago");
@@ -43,29 +48,73 @@ public class App {
 				opcionMenu = Integer.parseInt(sc.nextLine());
 				mostrarAdministrador(opcionMenu, sistema);
 				break;
-			case 2://Analista
+			case 2:// Analista
 				break;
-			case 3://Salir
+			case 3:// Salir
 				System.out.println("Saliendo...");
 				break;
 			}
-		}while (opcion != 3);
+		} while (opcion != 3);
 
 	}
 
 	private static void mostrarAdministrador(int opcionMenu, Sistema sistema) {
-		switch(opcionMenu) {
+		System.out.println("=== Menu Administrador ===\n");
+		switch (opcionMenu) {
 		case 1:
 			System.out.println("Ingrese el nombre del mago que quiere agregar");
 			System.out.print("> ");
 			String nombreMago = sc.nextLine().strip();
-			if(sistema.agregarMago(nombreMago)) {
+			if (sistema.agregarMago(nombreMago)) {
 				System.out.println("Se agregó el mago " + nombreMago + " sin problemas.\n");
-			}else {
+			} else {
 				System.out.println("No se pudo agregar el mago " + nombreMago + "\n");
 			}
 			break;
 		case 2:
+			int cont = 0;
+			for (Mago m : sistema.getMagos()) {
+
+				System.out.print(cont + ") " + m.getNombre() + " - Hechizos: ");
+				for (Hechizo h : sistema.getMagos().get(cont).getHechizos()) {
+					System.out.print(h.getNombre() + "|");
+				}
+				System.out.println();
+				cont += 1;
+			}
+			int opcionMagoMod = 0;
+			do {
+				System.out.println("Ingrese el nombre del mago que quiere modificar?");
+				System.out.println("O ingrese Salir para volver");
+				System.out.print("> ");
+				String nombreMagoMod = sc.nextLine();
+				System.out.println("Que quieres modificar del mago");
+				System.out.println("1) Nombre");
+				System.out.println("2) Agregar Hechizo");
+				System.out.println("3) Quitar Hechizo");
+				System.out.println("4) Eliminar Mago");
+				System.out.println("5) Salir");
+				System.out.print("Ingrese una opcion: ");
+				opcionMagoMod = Integer.parseInt(sc.nextLine());
+				switch (opcionMagoMod) {
+				case 1:
+
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				case 5:
+					System.out.println("Saliendo...");
+					break;
+				default:
+					System.out.println("Saliendo porque ingresó una opcion incorrecta");
+					break;
+				}
+			} while (opcionMagoMod != 5);
+
 			break;
 		case 3:
 			break;
@@ -78,6 +127,6 @@ public class App {
 		default:
 			break;
 		}
-		
+
 	}
 }
