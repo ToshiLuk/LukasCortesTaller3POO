@@ -18,7 +18,7 @@ public class SistemaImp implements Sistema {
 	private ArrayList<Mago> listaMagos;
 	private ArrayList<Hechizo> listaHechizos;
 	private static Scanner lector;
-
+	
 	public SistemaImp() {
 		this.listaMagos = new ArrayList<Mago>();
 		this.listaHechizos = new ArrayList<Hechizo>();
@@ -126,4 +126,25 @@ public class SistemaImp implements Sistema {
 		}
 		return true;//Todo bem
 	}
+
+	@Override
+	public ArrayList<Mago> getMagos() {
+		return listaMagos;
+	}
+
+	@Override
+	public ArrayList<Hechizo> getHechizos() {
+		return listaHechizos;
+	}
+
+	@Override
+	public boolean modificarMago(String nombreMagoMod) {
+		for(Mago m : listaMagos) {
+			if(m.getNombre().equalsIgnoreCase(nombreMagoMod)) {
+				
+			}
+		}
+		return false;
+	}
+	
 }
