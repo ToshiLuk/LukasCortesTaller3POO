@@ -275,4 +275,16 @@ public class SistemaImp implements Sistema {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean modificarHechizo(String nombreHechizoMod, int opcionHechizoMod, String datoNuevo) {
+		for(Hechizo h : listaHechizos) {
+			if(h.getNombre().equalsIgnoreCase(nombreHechizoMod)) {
+				switch(opcionHechizoMod) {
+				
+				}
+			}
+		}
+		return false;
+	}
 }

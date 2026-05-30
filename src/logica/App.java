@@ -3,6 +3,10 @@ package logica;
 import java.util.Scanner;
 
 import dominio.Hechizo;
+import dominio.HechizoAgua;
+import dominio.HechizoFuego;
+import dominio.HechizoPlanta;
+import dominio.HechizoTierra;
 import dominio.Mago;
 
 public class App {
@@ -76,8 +80,8 @@ public class App {
 			do {
 				int cont = 0;
 				for (Mago m : sistema.getMagos()) {
-					
-					System.out.print((cont+1) + ") " + m.getNombre() + " - Hechizos: ");
+
+					System.out.print((cont + 1) + ") " + m.getNombre() + " - Hechizos: ");
 					for (Hechizo h : sistema.getMagos().get(cont).getHechizos()) {
 						System.out.print(h.getNombre() + "|");
 					}
@@ -89,7 +93,8 @@ public class App {
 				System.out.println("O ingrese Salir para volver");
 				System.out.print("> ");
 				String nombreMagoMod = sc.nextLine();
-				if(nombreMagoMod.equalsIgnoreCase("Salir")) break;
+				if (nombreMagoMod.equalsIgnoreCase("Salir"))
+					break;
 				System.out.println("Que quieres modificar del mago " + nombreMagoMod);
 				System.out.println("1) Nombre");
 				System.out.println("2) Agregar Hechizo");
@@ -107,7 +112,7 @@ public class App {
 				case 2:
 					cont = 0;
 					for (Hechizo h : sistema.getHechizos()) {
-						System.out.println((cont+1) + ") " + h.getNombre());
+						System.out.println((cont + 1) + ") " + h.getNombre());
 						cont += 1;
 					}
 					System.out.println("Ingrese que hechizo quiere agregarle a " + nombreMagoMod);
@@ -116,14 +121,14 @@ public class App {
 					break;
 				case 3:
 					cont = 0;
-					for(Mago m : sistema.getMagos()) {
-						if(m.getNombre().equalsIgnoreCase(nombreMagoMod)) {
-							if(m.getHechizos().isEmpty()) {
+					for (Mago m : sistema.getMagos()) {
+						if (m.getNombre().equalsIgnoreCase(nombreMagoMod)) {
+							if (m.getHechizos().isEmpty()) {
 								System.out.println("Este mago no tiene hechizos...");
-							}else {
-								for(Hechizo h : m.getHechizos()) {
-									System.out.println((cont+1) + h.getNombre());
-									cont +=1;
+							} else {
+								for (Hechizo h : m.getHechizos()) {
+									System.out.println((cont + 1) + h.getNombre());
+									cont += 1;
 								}
 							}
 						}
@@ -146,22 +151,93 @@ public class App {
 			break;
 		case 3:
 			int cont = 0;
-			for(Mago m : sistema.getMagos()) {
-				System.out.println((cont+1) + ") " + m.getNombre());
+			for (Mago m : sistema.getMagos()) {
+				System.out.println((cont + 1) + ") " + m.getNombre());
 			}
 			System.out.println("Ingrese el nombre del mago que quiere eliminar?");
 			System.out.print(">");
 			String nombreMagoMod = sc.nextLine();
-			if(sistema.modificarMago(nombreMagoMod, 4, "")) {
+			if (sistema.modificarMago(nombreMagoMod, 4, "")) {
 				System.out.println("Se eliminó el mago " + nombreMagoMod);
-			}else {
+			} else {
 				System.out.println("No se pudo eliminar el mago");
 			}
 			break;
 		case 4:
+			break;
+		case 5:
+			int opcionHechizoMod = 0;
+			String datoNuevo = "";
+			do {
+				cont = 0;
+				for (Hechizo h : sistema.getHechizos()) {
+					System.out.println((cont + 1) + ") " + h.getNombre());
+					System.out.print("|Daño: " + h.getDaño() + "|Tipo: " + h.getTipo());
+					if (h.getTipo().equalsIgnoreCase("Fuego")) {
+						HechizoFuego f = (HechizoFuego) h;
+						System.out.print("|DuraciónQuemadura: " + (f.getDuracionQuemadura()));
+					} else if (h.getTipo().equalsIgnoreCase("Tierra")) {
+						HechizoTierra t = (HechizoTierra) h;
+						System.out.println("|MejoraDefensa: " + t.getMejoraDefensa());
+					} else if (h.getTipo().equalsIgnoreCase("Planta")) {
+						HechizoPlanta p = (HechizoPlanta) h;
+						System.out.println("|DuraciónStun: " + p.getDuracionStun() + "|CantPlanta: " + p.getCantPlanta());
+					} else if (h.getTipo().equalsIgnoreCase("Agua")) {
+						HechizoAgua a = (HechizoAgua) h;
+						System.out.println("|CantidadHeal: " + a.getCantHeal() + "|PresiónDeAgua: " + a.getPresionAgua());
+					}
+					System.out.println();
+				}
+				System.out.println("==================================================");
+				System.out.println("Ingrese el nombre del hechizo que quiere modificar");
+				System.out.print(">");
+				String nombreHechizoMod = sc.nextLine();
+				System.out.println("Que quieres modificar del mago " + nombreHechizoMod);
+				System.out.println("1) Nombre");
+				System.out.println("2) Cambiar Stats");
+				System.out.println("3) Salir");
+				System.out.print("Ingrese una opcion: ");
+				opcionHechizoMod = Integer.parseInt(sc.nextLine());
+				switch(opcionHechizoMod) {
+				case 1:
+					System.out.println("Ingrese el nombre");
+					System.out.print("> ");
+					datoNuevo = sc.nextLine();
+					if(sistema.modificarHechizo(nombreHechizoMod, opcionHechizoMod, datoNuevo)) {
+						System.out.println("Se cambió el nombre correctamente");
+					}else {
+						System.out.println("No se pudo cambiar el nombre...");
+					}
+					break;
+				case 2:
+					for(Hechizo h : sistema.getHechizos()) {
+						if(h.getNombre().equalsIgnoreCase(nombreHechizoMod)) {
+							switch(h.getTipo()) {
+							case "Fuego":
+								break;
+							case "Tierra":
+								break;
+							case "Planta":
+								break;
+							case "Agua":
+								break;
+							}
+						}
+					}
+					break;
+				case 3:
+					break;
+				default:
+					System.out.println("Hubo un error...");
+					break;
+				}
+		}while(opcionHechizoMod!= 3);
+			
+			break;
+		case 6:
 			cont = 0;
-			for(Hechizo h : sistema.getHechizos()) {
-				System.out.print((cont+1) + ") " + h.getNombre());
+			for (Hechizo h : sistema.getHechizos()) {
+				System.out.print((cont + 1) + ") " + h.getNombre());
 				System.out.print("|Daño: " + h.getDaño() + "|Tipo: " + h.getTipo());
 				System.out.println();
 			}
@@ -169,15 +245,11 @@ public class App {
 			System.out.println("Ingrese el nombre del hechizo que quiere eliminar");
 			System.out.print(">");
 			String hechizoElim = sc.nextLine();
-			if(sistema.eliminarHechizo(hechizoElim)) {
+			if (sistema.eliminarHechizo(hechizoElim)) {
 				System.out.println("Se eliminó el hechizo");
-			}else {
+			} else {
 				System.out.println("No se pudo eliminar el hechizo");
 			}
-			break;
-		case 5:
-			break;
-		case 6:
 			break;
 		default:
 			break;
