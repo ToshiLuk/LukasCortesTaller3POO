@@ -225,4 +225,54 @@ public class SistemaImp implements Sistema {
 			System.out.println("Error grave: No se pudo actualizar Magos.txt");
 		}
 	}
+	// Método privado para sobreescribir el archivo Hechizos.txt
+		private void actualizarArchivoHechizos() {
+			try {
+				File arch = new File("datos/Hechizos.txt");
+				// El 'false' borra todo el archivo y lo crea de nuevo
+				FileWriter fw = new FileWriter(arch, false); 
+				BufferedWriter writer = new BufferedWriter(fw);
+				
+				for (Hechizo h : listaHechizos) {
+					// 1. Escribimos la parte común que tienen TODOS los hechizos
+					writer.write(h.getNombre() + ";" + h.getTipo() + ";" + h.getDaño() + ";");
+					
+					// 2. Escribimos la parte específica dependiendo del elemento
+					if (h instanceof HechizoFuego) {
+						HechizoFuego hFuego = (HechizoFuego) h; // Transformamos
+						writer.write(String.valueOf(hFuego.getDuracionQuemadura()));
+						
+					} else if (h instanceof HechizoTierra) {
+						HechizoTierra hTierra = (HechizoTierra) h;
+						writer.write(String.valueOf(hTierra.getMejoraDefensa()));
+						
+					} else if (h instanceof HechizoPlanta) {
+						HechizoPlanta hPlanta = (HechizoPlanta) h;
+						// Ojo aquí: Planta y Agua separan sus últimos dos datos con una coma
+						writer.write(hPlanta.getDuracionStun() + "," + hPlanta.getCantPlanta());
+						
+					} else if (h instanceof HechizoAgua) {
+						HechizoAgua hAgua = (HechizoAgua) h;
+						writer.write(hAgua.getCantHeal() + "," + hAgua.getPresionAgua());
+					}
+					
+					// 3. Salto de línea para el próximo hechizo
+					writer.newLine();
+				}
+				writer.close();
+			} catch (Exception e) {
+				System.out.println("Error grave: No se pudo actualizar Hechizos.txt");
+			}
+		}
+	@Override
+	public boolean eliminarHechizo(String hechizoElim) {
+		for(Hechizo h : listaHechizos) {
+			if(h.getNombre().equalsIgnoreCase(hechizoElim)) {
+				listaHechizos.remove(h);
+				actualizarArchivoHechizos();
+				return true;
+			}
+		}
+		return false;
+	}
 }

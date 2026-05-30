@@ -72,8 +72,6 @@ public class App {
 			}
 			break;
 		case 2:
-			
-			
 			int opcionMagoMod = 0;
 			do {
 				int cont = 0;
@@ -155,12 +153,27 @@ public class App {
 			System.out.print(">");
 			String nombreMagoMod = sc.nextLine();
 			if(sistema.modificarMago(nombreMagoMod, 4, "")) {
-				System.out.println("Se eliminó correctamente el mago " + nombreMagoMod);
+				System.out.println("Se eliminó el mago " + nombreMagoMod);
 			}else {
 				System.out.println("No se pudo eliminar el mago");
 			}
 			break;
 		case 4:
+			cont = 0;
+			for(Hechizo h : sistema.getHechizos()) {
+				System.out.print((cont+1) + ") " + h.getNombre());
+				System.out.print("|Daño: " + h.getDaño() + "|Tipo: " + h.getTipo());
+				System.out.println();
+			}
+			System.out.println("==================================================");
+			System.out.println("Ingrese el nombre del hechizo que quiere eliminar");
+			System.out.print(">");
+			String hechizoElim = sc.nextLine();
+			if(sistema.eliminarHechizo(hechizoElim)) {
+				System.out.println("Se eliminó el hechizo");
+			}else {
+				System.out.println("No se pudo eliminar el hechizo");
+			}
 			break;
 		case 5:
 			break;

@@ -13,4 +13,5 @@ public interface Sistema {
 	ArrayList<Mago> getMagos();
 	ArrayList<Hechizo> getHechizos();
 	boolean modificarMago(String nombreMagoMod, int opcionMagoMod, String datoNuevo);
+	boolean eliminarHechizo(String hechizoElim);
 }
