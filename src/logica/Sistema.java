@@ -12,5 +12,5 @@ public interface Sistema {
 	boolean agregarMago(String nombreMago);
 	ArrayList<Mago> getMagos();
 	ArrayList<Hechizo> getHechizos();
-	boolean modificarMago(String nombreMagoMod, int opcionMagoMod);
+	boolean modificarMago(String nombreMagoMod, int opcionMagoMod, String datoNuevo);
 }

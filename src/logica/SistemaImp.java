@@ -31,6 +31,7 @@ public class SistemaImp implements Sistema {
 			lector = new Scanner(arch);
 			while (lector.hasNextLine()) {
 				String linea = lector.nextLine();
+				if(linea.trim().isEmpty()) continue; // Salta las líneas en blanco
 				String[] partes = linea.split(";");
 				// Información de los hechizos
 				String nombre = partes[0].strip();
@@ -71,9 +72,16 @@ public class SistemaImp implements Sistema {
 			lector = new Scanner(arch);
 			while (lector.hasNextLine()) {
 				String linea = lector.nextLine();
+				if(linea.trim().isEmpty()) continue; // Salta las líneas en blanco
 				String[] partes = linea.split(";");
+				if(partes.length == 1) {
+					Mago mago = new Mago(partes[0].strip());
+					listaMagos.add(mago);
+					continue;
+				}
 				String nombre = partes[0].strip();
 				Mago mago = new Mago(nombre);
+				
 				String[] partesHechizos = partes[1].split("\\|");
 				for (int i = 0; i < partesHechizos.length; i++) {
 					// Para una cantidad i de hechizos y evitar error IndexOutOfBounds 
@@ -138,27 +146,79 @@ public class SistemaImp implements Sistema {
 	}
 
 	@Override
-	public boolean modificarMago(String nombreMagoMod, int opcionMagoMod) {
+	public boolean modificarMago(String nombreMagoMod, int opcionMagoMod, String datoNuevo) {
 		for(Mago m : listaMagos) {
 			if(m.getNombre().equalsIgnoreCase(nombreMagoMod)) {
 				switch(opcionMagoMod) {
 					//Nombre
 				case 1:
-					
-					break;
+					//Cambiamos el nombre
+					m.setNombre(datoNuevo);
+					//Actualizamos el txt
+					actualizarArchivoMagos();
+					return true;
 					//Agregar Hechizo	
 				case 2:
-					break;
+					//Buscamos el hechizo y creamos una copia
+					Hechizo hechizoNuevo = buscarHechizo(datoNuevo);
+					//Si el hechizo existe
+					if(hechizoNuevo != null) {
+						m.getHechizos().add(hechizoNuevo);
+						actualizarArchivoMagos();
+						return true;
+					}
+					return false;
 					//Quitar Hechizo
 				case 3:
-					break;
+					//Buscamos el hechizo a borrar entre los hechizos del mago
+					for(Hechizo h : m.getHechizos()) {
+						if(h.getNombre().equalsIgnoreCase(datoNuevo)) {
+							m.getHechizos().remove(h);
+							actualizarArchivoMagos();
+							return true;
+						}
+						return false;
+					}
 					//Eliminar Mago
 				case 4:
-					break;
+					//Quitamos de la lista de magos el mago a eliminar
+					listaMagos.remove(m);
+					actualizarArchivoMagos();
+					return true;
 				}
 			}
 		}
 		return false;
 	}
-	
+	// Método privado para sobreescribir el archivo Magos.txt
+		private void actualizarArchivoMagos() {
+			try {
+				File arch = new File("datos/Magos.txt");
+				//El 'false' = Borrar y crear el archivo de nuevo, Sobreescribir
+				FileWriter fw = new FileWriter(arch, false); 
+				BufferedWriter writer = new BufferedWriter(fw);
+				
+				for (Mago m : listaMagos) {
+					//Escribimos el nombre y el punto y coma
+					writer.write(m.getNombre() + ";");
+					
+					//Escribimos sus hechizos separados por "|"
+					ArrayList<Hechizo> hechizosMago = m.getHechizos();
+					for (int i = 0; i < hechizosMago.size(); i++) {
+						writer.write(hechizosMago.get(i).getNombre());
+						
+						// Si NO es el último hechizo, se pone "|"
+						if (i < hechizosMago.size() - 1) {
+							writer.write("|");
+						}
+					}
+					
+					//Saltamos de línea para el siguiente mago
+					writer.newLine();
+				}
+				writer.close();
+			} catch (Exception e) {
+				System.out.println("Error grave: No se pudo actualizar Magos.txt");
+			}
+		}
 }

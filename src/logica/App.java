@@ -38,6 +38,7 @@ public class App {
 
 			switch (opcion) {
 			case 1:// Administrador
+				System.out.println("=== Menu Administrador ===");
 				System.out.println("\n1. Agregar Mago");
 				System.out.println("2. Modificar Mago");
 				System.out.println("3. Eliminar Mago");
@@ -59,7 +60,6 @@ public class App {
 	}
 
 	private static void mostrarAdministrador(int opcionMenu, Sistema sistema) {
-		System.out.println("=== Menu Administrador ===\n");
 		switch (opcionMenu) {
 		case 1:
 			System.out.println("Ingrese el nombre del mago que quiere agregar");
@@ -72,23 +72,27 @@ public class App {
 			}
 			break;
 		case 2:
-			int cont = 0;
-			for (Mago m : sistema.getMagos()) {
-
-				System.out.print(cont + ") " + m.getNombre() + " - Hechizos: ");
-				for (Hechizo h : sistema.getMagos().get(cont).getHechizos()) {
-					System.out.print(h.getNombre() + "|");
-				}
-				System.out.println();
-				cont += 1;
-			}
+			
+			
 			int opcionMagoMod = 0;
 			do {
+				int cont = 0;
+				for (Mago m : sistema.getMagos()) {
+					
+					System.out.print((cont+1) + ") " + m.getNombre() + " - Hechizos: ");
+					for (Hechizo h : sistema.getMagos().get(cont).getHechizos()) {
+						System.out.print(h.getNombre() + "|");
+					}
+					System.out.println();
+					cont += 1;
+				}
+				System.out.println("==================================================");
 				System.out.println("Ingrese el nombre del mago que quiere modificar?");
 				System.out.println("O ingrese Salir para volver");
 				System.out.print("> ");
 				String nombreMagoMod = sc.nextLine();
-				System.out.println("Que quieres modificar del mago");
+				if(nombreMagoMod.equalsIgnoreCase("Salir")) break;
+				System.out.println("Que quieres modificar del mago " + nombreMagoMod);
 				System.out.println("1) Nombre");
 				System.out.println("2) Agregar Hechizo");
 				System.out.println("3) Quitar Hechizo");
@@ -96,12 +100,53 @@ public class App {
 				System.out.println("5) Salir");
 				System.out.print("Ingrese una opcion: ");
 				opcionMagoMod = Integer.parseInt(sc.nextLine());
+				String datoNuevo = "";
+				switch (opcionMagoMod) {
+				case 1:
+					System.out.println("Ingrese el nuevo nombre para " + nombreMagoMod);
+					System.out.print(">");
+					datoNuevo = sc.nextLine();
+					break;
+				case 2:
+					cont = 0;
+					for (Hechizo h : sistema.getHechizos()) {
+						System.out.println((cont+1) + ") " + h.getNombre());
+						cont += 1;
+					}
+					System.out.println("Ingrese que hechizo quiere agregarle a " + nombreMagoMod);
+					System.out.print("> ");
+					datoNuevo = sc.nextLine();
+					break;
+				case 3:
+					cont = 0;
+					for(Mago m : sistema.getMagos()) {
+						if(m.getNombre().equalsIgnoreCase(nombreMagoMod)) {
+							if(m.getHechizos().isEmpty()) {
+								System.out.println("Este mago no tiene hechizos...");
+							}else {
+								for(Hechizo h : m.getHechizos()) {
+									System.out.println((cont+1) + h.getNombre());
+									cont +=1;
+								}
+							}
+						}
+					}
+					System.out.println("Ingrese que hechizo le quiere quitar a " + nombreMagoMod);
+					datoNuevo = sc.nextLine();
+					break;
+				case 4:
+					System.out.println("Eliminando mago...");
+					break;
+				}
 				if (opcionMagoMod == 5) {
 					System.out.println("Saliendo...");
-				} else if (opcionMagoMod != 5 && opcionMagoMod != 1 && opcionMagoMod != 2 && opcionMagoMod != 3 && opcionMagoMod != 4) {
+				} else if (opcionMagoMod != 5 && opcionMagoMod != 1 && opcionMagoMod != 2 && opcionMagoMod != 3
+						&& opcionMagoMod != 4) {
 					System.out.println("Saliendo porque ingresó una opcion incorrecta");
-				} else if(sistema.modificarMago(nombreMagoMod, opcionMagoMod)){
-					System.out.println("Se modificó correctamente el mago " + nombreMagoMod);
+				} else if (sistema.modificarMago(nombreMagoMod, opcionMagoMod, datoNuevo)) {
+					System.out.println("Se modificó correctamente el mago " + nombreMagoMod + "\n");
+				} else {
+					System.out.println("No se pudo hacer correctamente las modificaciones a " + nombreMagoMod);
 				}
 			} while (opcionMagoMod != 5);
 
