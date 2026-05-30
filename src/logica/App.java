@@ -96,8 +96,7 @@ public class App {
 				System.out.println("1) Nombre");
 				System.out.println("2) Agregar Hechizo");
 				System.out.println("3) Quitar Hechizo");
-				System.out.println("4) Eliminar Mago");
-				System.out.println("5) Salir");
+				System.out.println("4) Salir");
 				System.out.print("Ingrese una opcion: ");
 				opcionMagoMod = Integer.parseInt(sc.nextLine());
 				String datoNuevo = "";
@@ -134,24 +133,32 @@ public class App {
 					System.out.println("Ingrese que hechizo le quiere quitar a " + nombreMagoMod);
 					datoNuevo = sc.nextLine();
 					break;
-				case 4:
-					System.out.println("Eliminando mago...");
-					break;
 				}
-				if (opcionMagoMod == 5) {
+				if (opcionMagoMod == 4) {
 					System.out.println("Saliendo...");
-				} else if (opcionMagoMod != 5 && opcionMagoMod != 1 && opcionMagoMod != 2 && opcionMagoMod != 3
-						&& opcionMagoMod != 4) {
+				} else if (opcionMagoMod != 4 && opcionMagoMod != 1 && opcionMagoMod != 2 && opcionMagoMod != 3) {
 					System.out.println("Saliendo porque ingresó una opcion incorrecta");
 				} else if (sistema.modificarMago(nombreMagoMod, opcionMagoMod, datoNuevo)) {
 					System.out.println("Se modificó correctamente el mago " + nombreMagoMod + "\n");
 				} else {
 					System.out.println("No se pudo hacer correctamente las modificaciones a " + nombreMagoMod);
 				}
-			} while (opcionMagoMod != 5);
+			} while (opcionMagoMod != 4);
 
 			break;
 		case 3:
+			int cont = 0;
+			for(Mago m : sistema.getMagos()) {
+				System.out.println((cont+1) + ") " + m.getNombre());
+			}
+			System.out.println("Ingrese el nombre del mago que quiere eliminar?");
+			System.out.print(">");
+			String nombreMagoMod = sc.nextLine();
+			if(sistema.modificarMago(nombreMagoMod, 4, "")) {
+				System.out.println("Se eliminó correctamente el mago " + nombreMagoMod);
+			}else {
+				System.out.println("No se pudo eliminar el mago");
+			}
 			break;
 		case 4:
 			break;
