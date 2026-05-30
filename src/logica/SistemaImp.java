@@ -138,10 +138,24 @@ public class SistemaImp implements Sistema {
 	}
 
 	@Override
-	public boolean modificarMago(String nombreMagoMod) {
+	public boolean modificarMago(String nombreMagoMod, int opcionMagoMod) {
 		for(Mago m : listaMagos) {
 			if(m.getNombre().equalsIgnoreCase(nombreMagoMod)) {
-				
+				switch(opcionMagoMod) {
+					//Nombre
+				case 1:
+					
+					break;
+					//Agregar Hechizo	
+				case 2:
+					break;
+					//Quitar Hechizo
+				case 3:
+					break;
+					//Eliminar Mago
+				case 4:
+					break;
+				}
 			}
 		}
 		return false;

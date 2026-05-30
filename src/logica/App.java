@@ -96,22 +96,12 @@ public class App {
 				System.out.println("5) Salir");
 				System.out.print("Ingrese una opcion: ");
 				opcionMagoMod = Integer.parseInt(sc.nextLine());
-				switch (opcionMagoMod) {
-				case 1:
-
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				case 4:
-					break;
-				case 5:
+				if (opcionMagoMod == 5) {
 					System.out.println("Saliendo...");
-					break;
-				default:
+				} else if (opcionMagoMod != 5 && opcionMagoMod != 1 && opcionMagoMod != 2 && opcionMagoMod != 3 && opcionMagoMod != 4) {
 					System.out.println("Saliendo porque ingresó una opcion incorrecta");
-					break;
+				} else if(sistema.modificarMago(nombreMagoMod, opcionMagoMod)){
+					System.out.println("Se modificó correctamente el mago " + nombreMagoMod);
 				}
 			} while (opcionMagoMod != 5);
 
