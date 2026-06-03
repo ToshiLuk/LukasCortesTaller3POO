@@ -211,10 +211,10 @@ public class App {
 								// mismo metodo sin que explote todo
 								switch (opcionHechizoMod) {
 								case 1:
-									opcionHechizoMod = 4;
+									opcionHechizoMod = 2;
 									break;
 								case 2:
-									opcionHechizoMod = 5;
+									opcionHechizoMod = 3;
 									break;
 								}
 								break;
@@ -228,10 +228,10 @@ public class App {
 								// mismo metodo sin que explote todo
 								switch (opcionHechizoMod) {
 								case 1:
-									opcionHechizoMod = 4;
+									opcionHechizoMod = 2;
 									break;
 								case 2:
-									opcionHechizoMod = 5;
+									opcionHechizoMod = 3;
 									break;
 								}
 								break;
@@ -246,13 +246,13 @@ public class App {
 								// mismo metodo sin que explote todo
 								switch (opcionHechizoMod) {
 								case 1:
-									opcionHechizoMod = 4;
+									opcionHechizoMod = 2;
 									break;
 								case 2:
-									opcionHechizoMod = 5;
+									opcionHechizoMod = 3;
 									break;
 								case 3:
-									opcionHechizoMod = 5;
+									opcionHechizoMod = 4;
 									break;
 								}
 								break;
@@ -267,18 +267,18 @@ public class App {
 								// mismo metodo sin que explote todo
 								switch (opcionHechizoMod) {
 								case 1:
-									opcionHechizoMod = 4;
+									opcionHechizoMod = 2;
 									break;
 								case 2:
-									opcionHechizoMod = 5;
+									opcionHechizoMod = 3;
 									break;
 								case 3:
-									opcionHechizoMod = 5;
+									opcionHechizoMod = 4;
 									break;
 								}
 							}
 							//Control de errores
-							if (opcionHechizoMod > 0 && opcionHechizoMod < 5) {
+							if (opcionHechizoMod > 1 && opcionHechizoMod < 5) {
 								System.out.print("Ingrese a que numero lo va a cambiar: ");
 								datoNuevo = sc.nextLine();
 								//Llamado a la función para cambiar el hechizo
@@ -292,6 +292,7 @@ public class App {
 					}
 					break;
 				case 3:
+					System.out.println("Saliendo...");
 					break;
 				default:
 					System.out.println("Hubo un error...");

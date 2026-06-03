@@ -281,16 +281,20 @@ public class SistemaImp implements Sistema {
 		for(Hechizo h : listaHechizos) {
 			if(h.getNombre().equalsIgnoreCase(nombreHechizoMod)) {
 				switch(opcionHechizoMod) {
+				//Cambiar Nombre
 				case 1:
+					h.setNombre(datoNuevo);
+					return true;
+				//Cambiar Daño	
+				case 2:
+					h.setDaño(Integer.parseInt(datoNuevo));
+					break;
+				//Cambiar Stat Especial 1
+				case 3:
 					
 					break;
-				case 2:
-					break;
-				case 3:
-					break;
+				//Cambiar Stat Especial 2
 				case 4:
-					break;
-				case 5:
 					break;
 				}
 			}
