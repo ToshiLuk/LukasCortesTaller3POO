@@ -171,9 +171,10 @@ public class App {
 			do {
 				cont = 0;
 				for (Hechizo h : sistema.getHechizos()) {
-				    cont++;
-				    // 
-				    System.out.println(cont + ") " + h.getNombre() + " | Tipo: " + h.getTipo() + " | " + h.obtenerDetalles());
+					cont++;
+					//
+					System.out.println(
+							cont + ") " + h.getNombre() + " | Tipo: " + h.getTipo() + " | " + h.obtenerDetalles());
 				}
 				System.out.println("==================================================");
 				System.out.println("Ingrese el nombre del hechizo que quiere modificar");
@@ -185,33 +186,107 @@ public class App {
 				System.out.println("3) Salir");
 				System.out.print("Ingrese una opcion: ");
 				opcionHechizoMod = Integer.parseInt(sc.nextLine());
-				switch(opcionHechizoMod) {
+				switch (opcionHechizoMod) {
 				case 1:
 					System.out.println("Ingrese el nombre");
 					System.out.print("> ");
 					datoNuevo = sc.nextLine();
-					if(sistema.modificarHechizo(nombreHechizoMod, opcionHechizoMod, datoNuevo)) {
+					if (sistema.modificarHechizo(nombreHechizoMod, opcionHechizoMod, datoNuevo)) {
 						System.out.println("Se cambió el nombre correctamente");
-					}else {
+					} else {
 						System.out.println("No se pudo cambiar el nombre...");
 					}
 					break;
 				case 2:
-					for(Hechizo h : sistema.getHechizos()) {
-						if(h.getNombre().equalsIgnoreCase(nombreHechizoMod)) {
-							switch(h.getTipo()) {
+					for (Hechizo h : sistema.getHechizos()) {
+						if (h.getNombre().equalsIgnoreCase(nombreHechizoMod)) {
+							switch (h.getTipo()) {
 							case "Fuego":
-								
+								System.out.println(h.getNombre() + " | " + h.obtenerDetalles());
 								System.out.println("Que stat quiere cambiar?");
-								System.out.println("1) Daño: ");
+								System.out.println("1) Daño");
 								System.out.println("2) Duración de quemadura");
+								opcionHechizoMod = Integer.parseInt(sc.nextLine());
+								// Con estas condicionales puedo tener los cambios de nombre y de stats en el
+								// mismo metodo sin que explote todo
+								switch (opcionHechizoMod) {
+								case 1:
+									opcionHechizoMod = 4;
+									break;
+								case 2:
+									opcionHechizoMod = 5;
+									break;
+								}
 								break;
 							case "Tierra":
+								System.out.println(h.getNombre() + " | " + h.obtenerDetalles());
+								System.out.println("Que stat quiere cambiar?");
+								System.out.println("1) Daño");
+								System.out.println("2) Mejora de Defensa");
+								opcionHechizoMod = Integer.parseInt(sc.nextLine());
+								// Con estas condicionales puedo tener los cambios de nombre y de stats en el
+								// mismo metodo sin que explote todo
+								switch (opcionHechizoMod) {
+								case 1:
+									opcionHechizoMod = 4;
+									break;
+								case 2:
+									opcionHechizoMod = 5;
+									break;
+								}
 								break;
 							case "Planta":
+								System.out.println(h.getNombre() + " | " + h.obtenerDetalles());
+								System.out.println("Que stat quiere cambiar?");
+								System.out.println("1) Daño");
+								System.out.println("2) Duración de Stun");
+								System.out.println("3) Cantidad de Plantas");
+								opcionHechizoMod = Integer.parseInt(sc.nextLine());
+								// Con estas condicionales puedo tener los cambios de nombre y de stats en el
+								// mismo metodo sin que explote todo
+								switch (opcionHechizoMod) {
+								case 1:
+									opcionHechizoMod = 4;
+									break;
+								case 2:
+									opcionHechizoMod = 5;
+									break;
+								case 3:
+									opcionHechizoMod = 5;
+									break;
+								}
 								break;
 							case "Agua":
-								break;
+								System.out.println(h.getNombre() + " | " + h.obtenerDetalles());
+								System.out.println("Que stat quiere cambiar?");
+								System.out.println("1) Daño");
+								System.out.println("2) Cantidad de Curación");
+								System.out.println("3) Presión de Agua");
+								opcionHechizoMod = Integer.parseInt(sc.nextLine());
+								// Con estas condicionales puedo tener los cambios de nombre y de stats en el
+								// mismo metodo sin que explote todo
+								switch (opcionHechizoMod) {
+								case 1:
+									opcionHechizoMod = 4;
+									break;
+								case 2:
+									opcionHechizoMod = 5;
+									break;
+								case 3:
+									opcionHechizoMod = 5;
+									break;
+								}
+							}
+							//Control de errores
+							if (opcionHechizoMod > 0 && opcionHechizoMod < 5) {
+								System.out.print("Ingrese a que numero lo va a cambiar: ");
+								datoNuevo = sc.nextLine();
+								//Llamado a la función para cambiar el hechizo
+								if (sistema.modificarHechizo(nombreHechizoMod, opcionHechizoMod, datoNuevo)) {
+									System.out.println("Se cambio la stat correctamente");
+								} else {
+									System.out.println("Error: No se pudo cambiar la stat...");
+								}
 							}
 						}
 					}
@@ -222,8 +297,8 @@ public class App {
 					System.out.println("Hubo un error...");
 					break;
 				}
-		}while(opcionHechizoMod!= 3);
-			
+			} while (opcionHechizoMod != 3);
+
 			break;
 		case 6:
 			cont = 0;
