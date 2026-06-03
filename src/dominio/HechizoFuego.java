@@ -15,5 +15,11 @@ public class HechizoFuego extends Hechizo{
 	public int getDuracionQuemadura() {
 		return duracionQuemadura;
 	}
+
+	@Override
+	public String obtenerDetalles() {
+		// TODO Auto-generated method stub
+		return super.obtenerDetalles() + " | Duración Quemadura: " + this.duracionQuemadura;
+	}
 	
 }

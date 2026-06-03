@@ -21,5 +21,9 @@ public class HechizoPlanta extends Hechizo{
 	public int getCantPlanta() {
 		return cantPlanta;
 	}
-	
+	@Override
+	public String obtenerDetalles() {
+		// TODO Auto-generated method stub
+		return super.obtenerDetalles() + " | Duración de Stun: " + this.duracionStun + " | Cantidad de Plantas: " + this.cantPlanta;
+	}
 }

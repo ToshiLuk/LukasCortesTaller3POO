@@ -28,4 +28,7 @@ public abstract class Hechizo {
 	public void setDaño(int daño) {
 		this.daño = daño;
 	}
+	public String obtenerDetalles() {
+	    return "Daño: " + this.daño;
+	}
 }

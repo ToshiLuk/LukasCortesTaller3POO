@@ -15,5 +15,11 @@ public class HechizoTierra extends Hechizo{
 	public int getMejoraDefensa() {
 		return mejoraDefensa;
 	}
+
+	@Override
+	public String obtenerDetalles() {
+		// TODO Auto-generated method stub
+		return super.obtenerDetalles() + " | Mejora de Defensa: " + this.mejoraDefensa ;
+	}
 	
 }

@@ -18,5 +18,8 @@ public class HechizoAgua extends Hechizo{
 	public int getPresionAgua() {
 		return presionAgua;
 	}
-	
+	public String obtenerDetalles() {
+		// TODO Auto-generated method stub
+		return super.obtenerDetalles() + " | Cantidad de curación: " + this.cantHeal + " | Presión de Agua: " + this.presionAgua;
+	}
 }

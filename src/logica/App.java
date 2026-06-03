@@ -171,28 +171,15 @@ public class App {
 			do {
 				cont = 0;
 				for (Hechizo h : sistema.getHechizos()) {
-					System.out.println((cont + 1) + ") " + h.getNombre());
-					System.out.print("|Daño: " + h.getDaño() + "|Tipo: " + h.getTipo());
-					if (h.getTipo().equalsIgnoreCase("Fuego")) {
-						HechizoFuego f = (HechizoFuego) h;
-						System.out.print("|DuraciónQuemadura: " + (f.getDuracionQuemadura()));
-					} else if (h.getTipo().equalsIgnoreCase("Tierra")) {
-						HechizoTierra t = (HechizoTierra) h;
-						System.out.println("|MejoraDefensa: " + t.getMejoraDefensa());
-					} else if (h.getTipo().equalsIgnoreCase("Planta")) {
-						HechizoPlanta p = (HechizoPlanta) h;
-						System.out.println("|DuraciónStun: " + p.getDuracionStun() + "|CantPlanta: " + p.getCantPlanta());
-					} else if (h.getTipo().equalsIgnoreCase("Agua")) {
-						HechizoAgua a = (HechizoAgua) h;
-						System.out.println("|CantidadHeal: " + a.getCantHeal() + "|PresiónDeAgua: " + a.getPresionAgua());
-					}
-					System.out.println();
+				    cont++;
+				    // 
+				    System.out.println(cont + ") " + h.getNombre() + " | Tipo: " + h.getTipo() + " | " + h.obtenerDetalles());
 				}
 				System.out.println("==================================================");
 				System.out.println("Ingrese el nombre del hechizo que quiere modificar");
 				System.out.print(">");
 				String nombreHechizoMod = sc.nextLine();
-				System.out.println("Que quieres modificar del mago " + nombreHechizoMod);
+				System.out.println("Que quieres modificar del hechizo " + nombreHechizoMod);
 				System.out.println("1) Nombre");
 				System.out.println("2) Cambiar Stats");
 				System.out.println("3) Salir");
@@ -214,6 +201,10 @@ public class App {
 						if(h.getNombre().equalsIgnoreCase(nombreHechizoMod)) {
 							switch(h.getTipo()) {
 							case "Fuego":
+								
+								System.out.println("Que stat quiere cambiar?");
+								System.out.println("1) Daño: ");
+								System.out.println("2) Duración de quemadura");
 								break;
 							case "Tierra":
 								break;
