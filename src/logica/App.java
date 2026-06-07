@@ -211,7 +211,7 @@ public class App {
 			}
 			//Si el tipo no esta vacio
 			if(!tipoNuevo.isEmpty()) {
-				if(sistema.agregarHehizo(nombreHechizo, tipoNuevo, daño, stat1, stat2)) {
+				if(sistema.agregarHechizo(nombreHechizo, tipoNuevo, daño, stat1, stat2)) {
 					System.out.println("¡Se agregó el hechizo " + nombreHechizo + " al catálogo global exitosament!\n");
 				}else {
 					System.out.println("Error: Ya hay un hechizo con ese nombre en el catálogo.\n");

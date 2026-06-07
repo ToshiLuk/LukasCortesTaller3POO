@@ -314,8 +314,18 @@ public class SistemaImp implements Sistema {
 	}
 
 	@Override
-	public boolean agregarHehizo(String nombreHechizo, String tipo, int daño, int stat1, int stat2) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean agregarHechizo(String nombreHechizo, String tipo, int daño, int stat1, int stat2) {
+		//Hay algun hechizo con este nombre?
+		for(Hechizo h : listaHechizos) {
+			if(h.getNombre().equalsIgnoreCase(nombreHechizo)) return false;
+		}
+		//Creamos objeto segun el tipo
+		if(tipo.equals("Fuego")) listaHechizos.add(new HechizoFuego(nombreHechizo,tipo,daño,stat1));
+		else if(tipo.equals("Tierra")) listaHechizos.add(new HechizoTierra(nombreHechizo, tipo, daño, stat1));
+		else if(tipo.equals("Planta")) listaHechizos.add(new HechizoPlanta(nombreHechizo, tipo, daño, stat1, stat2));
+		else if(tipo.equals("Agua")) listaHechizos.add(new HechizoAgua(nombreHechizo, tipo, daño, stat1, stat2));
+		//Actualizamos txt
+		actualizarArchivoHechizos();
+		return true;
 	}
 }
