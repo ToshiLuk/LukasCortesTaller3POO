@@ -79,8 +79,8 @@ public class App {
 			//Se ordena de mayor a menor
 			topHechizos.sort((h1,h2) -> Double.compare(h2.calcularPuntuacion(), h1.calcularPuntuacion()));
 			//Para que sean solo 10
-			int limite = Math.min(10, topHechizos.size());
-			for(int i= 0; i < limite; i++) {
+			int limiteHechizo = Math.min(10, topHechizos.size());
+			for(int i= 0; i < limiteHechizo; i++) {
 				Hechizo h = topHechizos.get(i);
 				//Print puntuación
 				System.out.println((i+1) + ") " + h.getNombre() + " | Tipo: " + h.getTipo() + "| Puntos: " + h.calcularPuntuacion());
@@ -89,6 +89,16 @@ public class App {
 			break;
 		//Top 3 magos
 		case 2:
+			System.out.println("\n--- Top 3 Mejores Magos ---");
+			//Clonamos la lista de magos
+			ArrayList<Mago> topMagos = new ArrayList<>(sistema.getMagos());
+			topMagos.sort((m1, m2) -> Double.compare(m2.calcularPuntuacionTotal(), m1.calcularPuntuacionTotal()));
+			int limiteMago = Math.min(3, topMagos.size());
+			for(int i = 0; i < limiteMago; i++) {
+				Mago m = topMagos.get(i);
+				System.out.println((i + 1) + ") " + m.getNombre() + " | Puntos Totales: " + m.calcularPuntuacionTotal());
+			}
+			System.out.println();
 			break;
 		//Mostrar los hechizos
 		case 3:
