@@ -102,6 +102,11 @@ public class App {
 			break;
 		//Mostrar los hechizos
 		case 3:
+			System.out.println("\n--- Todos los hechizos ---");
+			for(Hechizo h : sistema.getHechizos()) {
+				System.out.println("- " + h.getNombre() + " (" + h.getTipo() + ")");
+			}
+			System.out.println();
 			break;
 		//Mostrar magos
 		case 4:
