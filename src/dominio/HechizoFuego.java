@@ -21,5 +21,9 @@ public class HechizoFuego extends Hechizo{
 		// TODO Auto-generated method stub
 		return super.obtenerDetalles() + " | Duración Quemadura: " + this.duracionQuemadura;
 	}
+
+	public void setDuracionQuemadura(int duracionQuemadura) {
+		this.duracionQuemadura = duracionQuemadura;
+	}
 	
 }

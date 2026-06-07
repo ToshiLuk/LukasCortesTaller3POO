@@ -21,5 +21,9 @@ public class HechizoTierra extends Hechizo{
 		// TODO Auto-generated method stub
 		return super.obtenerDetalles() + " | Mejora de Defensa: " + this.mejoraDefensa ;
 	}
+
+	public void setMejoraDefensa(int mejoraDefensa) {
+		this.mejoraDefensa = mejoraDefensa;
+	}
 	
 }

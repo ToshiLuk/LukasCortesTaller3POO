@@ -284,18 +284,29 @@ public class SistemaImp implements Sistema {
 				//Cambiar Nombre
 				case 1:
 					h.setNombre(datoNuevo);
+					actualizarArchivoHechizos();
 					return true;
 				//Cambiar Daño	
 				case 2:
 					h.setDaño(Integer.parseInt(datoNuevo));
-					break;
+					actualizarArchivoHechizos();
+					return true;
 				//Cambiar Stat Especial 1
 				case 3:
-					
-					break;
+					int valorOp3 = Integer.parseInt(datoNuevo);
+					if(h.getTipo().equalsIgnoreCase("Fuego")) ((HechizoFuego) h).setDuracionQuemadura(valorOp3);
+					else if(h.getTipo().equalsIgnoreCase("Tierra")) ((HechizoTierra) h).setMejoraDefensa(valorOp3);
+					else if(h.getTipo().equalsIgnoreCase("Planta")) ((HechizoPlanta) h).setDuracionStun(valorOp3);
+					else if(h.getTipo().equalsIgnoreCase("Agua")) ((HechizoAgua) h).setCantHeal(valorOp3);
+					actualizarArchivoHechizos();
+					return true;
 				//Cambiar Stat Especial 2
 				case 4:
-					break;
+					int valorOp4 = Integer.parseInt(datoNuevo);
+					if(h.getTipo().equalsIgnoreCase("Planta")) ((HechizoPlanta) h).setCantPlanta(valorOp4);
+					else if(h.getTipo().equalsIgnoreCase("Agua")) ((HechizoAgua) h).setPresionAgua(valorOp4);
+					actualizarArchivoHechizos();
+					return true;
 				}
 			}
 		}

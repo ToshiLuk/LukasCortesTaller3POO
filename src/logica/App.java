@@ -3,10 +3,6 @@ package logica;
 import java.util.Scanner;
 
 import dominio.Hechizo;
-import dominio.HechizoAgua;
-import dominio.HechizoFuego;
-import dominio.HechizoPlanta;
-import dominio.HechizoTierra;
 import dominio.Mago;
 
 public class App {
@@ -200,40 +196,29 @@ public class App {
 				case 2:
 					for (Hechizo h : sistema.getHechizos()) {
 						if (h.getNombre().equalsIgnoreCase(nombreHechizoMod)) {
+							int statElegida = 0; 
+							int opcionParaEnviar = 0;
+							
 							switch (h.getTipo()) {
 							case "Fuego":
 								System.out.println(h.getNombre() + " | " + h.obtenerDetalles());
 								System.out.println("Que stat quiere cambiar?");
 								System.out.println("1) Daño");
 								System.out.println("2) Duración de quemadura");
-								opcionHechizoMod = Integer.parseInt(sc.nextLine());
-								// Con estas condicionales puedo tener los cambios de nombre y de stats en el
-								// mismo metodo sin que explote todo
-								switch (opcionHechizoMod) {
-								case 1:
-									opcionHechizoMod = 2;
-									break;
-								case 2:
-									opcionHechizoMod = 3;
-									break;
-								}
+								
+								statElegida = Integer.parseInt(sc.nextLine());
+								if (statElegida == 1) opcionParaEnviar = 2;
+								if (statElegida == 2) opcionParaEnviar = 3;
 								break;
 							case "Tierra":
 								System.out.println(h.getNombre() + " | " + h.obtenerDetalles());
 								System.out.println("Que stat quiere cambiar?");
 								System.out.println("1) Daño");
 								System.out.println("2) Mejora de Defensa");
-								opcionHechizoMod = Integer.parseInt(sc.nextLine());
-								// Con estas condicionales puedo tener los cambios de nombre y de stats en el
-								// mismo metodo sin que explote todo
-								switch (opcionHechizoMod) {
-								case 1:
-									opcionHechizoMod = 2;
-									break;
-								case 2:
-									opcionHechizoMod = 3;
-									break;
-								}
+								
+								statElegida = Integer.parseInt(sc.nextLine());
+								if (statElegida == 1) opcionParaEnviar = 2;
+								if (statElegida == 2) opcionParaEnviar = 3;
 								break;
 							case "Planta":
 								System.out.println(h.getNombre() + " | " + h.obtenerDetalles());
@@ -241,20 +226,11 @@ public class App {
 								System.out.println("1) Daño");
 								System.out.println("2) Duración de Stun");
 								System.out.println("3) Cantidad de Plantas");
-								opcionHechizoMod = Integer.parseInt(sc.nextLine());
-								// Con estas condicionales puedo tener los cambios de nombre y de stats en el
-								// mismo metodo sin que explote todo
-								switch (opcionHechizoMod) {
-								case 1:
-									opcionHechizoMod = 2;
-									break;
-								case 2:
-									opcionHechizoMod = 3;
-									break;
-								case 3:
-									opcionHechizoMod = 4;
-									break;
-								}
+								
+								statElegida = Integer.parseInt(sc.nextLine());
+								if (statElegida == 1) opcionParaEnviar = 2;
+								if (statElegida == 2) opcionParaEnviar = 3;
+								if (statElegida == 3) opcionParaEnviar = 4;
 								break;
 							case "Agua":
 								System.out.println(h.getNombre() + " | " + h.obtenerDetalles());
@@ -262,30 +238,23 @@ public class App {
 								System.out.println("1) Daño");
 								System.out.println("2) Cantidad de Curación");
 								System.out.println("3) Presión de Agua");
-								opcionHechizoMod = Integer.parseInt(sc.nextLine());
-								// Con estas condicionales puedo tener los cambios de nombre y de stats en el
-								// mismo metodo sin que explote todo
-								switch (opcionHechizoMod) {
-								case 1:
-									opcionHechizoMod = 2;
-									break;
-								case 2:
-									opcionHechizoMod = 3;
-									break;
-								case 3:
-									opcionHechizoMod = 4;
-									break;
-								}
+								statElegida = Integer.parseInt(sc.nextLine());
+								
+								if (statElegida == 1) opcionParaEnviar = 2;
+								if (statElegida == 2) opcionParaEnviar = 3;
+								if (statElegida == 3) opcionParaEnviar = 4;
+								break;
 							}
-							//Control de errores
-							if (opcionHechizoMod > 1 && opcionHechizoMod < 5) {
+							
+							// Control de errores y envío
+							if (opcionParaEnviar >= 2 && opcionParaEnviar <= 4) {
 								System.out.print("Ingrese a que numero lo va a cambiar: ");
 								datoNuevo = sc.nextLine();
-								//Llamado a la función para cambiar el hechizo
-								if (sistema.modificarHechizo(nombreHechizoMod, opcionHechizoMod, datoNuevo)) {
-									System.out.println("Se cambio la stat correctamente");
+								// Llamado al metodo para cambiar el hechizo
+								if (sistema.modificarHechizo(nombreHechizoMod, opcionParaEnviar, datoNuevo)) {
+									System.out.println("Se cambio la stat correctamente\n");
 								} else {
-									System.out.println("Error: No se pudo cambiar la stat...");
+									System.out.println("Error: No se pudo cambiar la stat...\n");
 								}
 							}
 						}

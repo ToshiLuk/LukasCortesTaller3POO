@@ -26,4 +26,13 @@ public class HechizoPlanta extends Hechizo{
 		// TODO Auto-generated method stub
 		return super.obtenerDetalles() + " | Duración de Stun: " + this.duracionStun + " | Cantidad de Plantas: " + this.cantPlanta;
 	}
+
+	public void setDuracionStun(int duracionStun) {
+		this.duracionStun = duracionStun;
+	}
+
+	public void setCantPlanta(int cantPlanta) {
+		this.cantPlanta = cantPlanta;
+	}
+	
 }
