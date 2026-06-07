@@ -160,6 +160,63 @@ public class App {
 			}
 			break;
 		case 4:
+			System.out.println("=== Agregar Nuevo Hechizo ===");
+			System.out.println("Ingrese el nombre del hechizo: ");
+			String nombreHechizo = sc.nextLine().strip();
+			
+			System.out.println("Seleccione el tipo de elemento:");
+			System.out.println("1) Fuego");
+			System.out.println("2) Tierra");
+			System.out.println("3) Planta");
+			System.out.println("4) Agua");
+			System.out.print("> ");
+			int opcionTipo = Integer.parseInt(sc.nextLine());
+			
+			String tipoNuevo = "";
+			int stat1 = 0;
+			int stat2 = 0;
+			
+			System.out.print("Ingrese el Daño Base: ");
+			int daño = Integer.parseInt(sc.nextLine());
+			
+			//Dependiendo del tipo, pedimos los diferentes datos
+			switch(opcionTipo) {
+			case 1:
+				tipoNuevo = "Fuego";
+				System.out.print("Ingrese la duración de quemadura: ");
+				stat1 = Integer.parseInt(sc.nextLine());
+				break;
+			case 2:
+				tipoNuevo = "Tierra";
+				System.out.print("Ingrese la mejora de defensa: ");
+				stat1 = Integer.parseInt(sc.nextLine());
+				break;
+			case 3:
+				tipoNuevo = "Planta";
+				System.out.print("Ingrese la duración de stun: ");
+				stat1 = Integer.parseInt(sc.nextLine());
+				System.out.print("Ingrese la cantidad de plantas: ");
+				stat2 = Integer.parseInt(sc.nextLine());
+				break;
+			case 4:
+				tipoNuevo = "Agua";
+				System.out.print("Ingrese la cantidad de curación: ");
+				stat1 = Integer.parseInt(sc.nextLine());
+				System.out.print("Ingrese la presión de agua: ");
+				stat2 = Integer.parseInt(sc.nextLine());
+				break;
+			default:
+				System.out.println("Tipo invalido. Saliendo...");
+				break;
+			}
+			//Si el tipo no esta vacio
+			if(!tipoNuevo.isEmpty()) {
+				if(sistema.agregarHehizo(nombreHechizo, tipoNuevo, daño, stat1, stat2)) {
+					System.out.println("¡Se agregó el hechizo " + nombreHechizo + " al catálogo global exitosament!\n");
+				}else {
+					System.out.println("Error: Ya hay un hechizo con ese nombre en el catálogo.\n");
+				}
+			}
 			break;
 		case 5:
 			int opcionHechizoMod = 0;

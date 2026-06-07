@@ -312,4 +312,10 @@ public class SistemaImp implements Sistema {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean agregarHehizo(String nombreHechizo, String tipo, int daño, int stat1, int stat2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

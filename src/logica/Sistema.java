@@ -15,4 +15,5 @@ public interface Sistema {
 	boolean modificarMago(String nombreMagoMod, int opcionMagoMod, String datoNuevo);
 	boolean eliminarHechizo(String hechizoElim);
 	boolean modificarHechizo(String nombreHechizoMod, int opcionHechizoMod, String datoNuevo);
+	boolean agregarHehizo(String nombreHechizo, String tipo, int daño, int stat1, int stat2);
 }
