@@ -1,5 +1,6 @@
 package logica;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import dominio.Hechizo;
@@ -50,6 +51,15 @@ public class App {
 				mostrarAdministrador(opcionMenu, sistema);
 				break;
 			case 2:// Analista
+				System.out.println("=== Menu Analista ===");
+				System.out.println("\n1. Top 10 Mejores Hechizos");
+				System.out.println("2. Top 3 Mejores Magos");
+				System.out.println("3. Mostrar todos los hechizos");
+				System.out.println("4. Mostrar todos los magos");
+				System.out.println("5 Mostrar todos los hechizos junto a su puntuación");
+				System.out.println("6.Mostrar todos los magos junto a su puntuación");
+				opcionMenu = Integer.parseInt(sc.nextLine());
+				mostrarAnalista(opcionMenu, sistema);
 				break;
 			case 3:// Salir
 				System.out.println("Saliendo...");
@@ -57,6 +67,42 @@ public class App {
 			}
 		} while (opcion != 3);
 
+	}
+
+	private static void mostrarAnalista(int opcionMenu, Sistema sistema) {
+		switch(opcionMenu) {
+		//Top 10 hechizos
+		case 1:
+			System.out.println("\n--- Top 10 Mejores Hechizos ---");
+			//Clonamos la lista de hechizo
+			ArrayList<Hechizo> topHechizos = new ArrayList<Hechizo>(sistema.getHechizos());
+			//Se ordena de mayor a menor
+			topHechizos.sort((h1,h2) -> Double.compare(h2.calcularPuntuacion(), h1.calcularPuntuacion()));
+			//Para que sean solo 10
+			int limite = Math.min(10, topHechizos.size());
+			for(int i= 0; i < limite; i++) {
+				Hechizo h = topHechizos.get(i);
+				//Print puntuación
+				System.out.println((i+1) + ") " + h.getNombre() + " | Tipo: " + h.getTipo() + "| Puntos: " + h.calcularPuntuacion());
+			}
+			System.out.println();
+			break;
+		//Top 3 magos
+		case 2:
+			break;
+		//Mostrar los hechizos
+		case 3:
+			break;
+		//Mostrar magos
+		case 4:
+			break;
+		//Hechizos con su puntuacion
+		case 5:
+			break;
+		//Magos con su puntcuacion
+		case 6:
+			break;
+		}
 	}
 
 	private static void mostrarAdministrador(int opcionMenu, Sistema sistema) {
@@ -345,6 +391,7 @@ public class App {
 			}
 			break;
 		default:
+			System.out.println("Error");
 			break;
 		}
 
