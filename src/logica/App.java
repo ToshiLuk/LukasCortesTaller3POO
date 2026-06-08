@@ -130,6 +130,11 @@ public class App {
 			break;
 		//Magos con su puntcuacion
 		case 6:
+			System.out.println("\n--- Magos y su puntuación ---");
+			for (Mago m : sistema.getMagos()) {
+				System.out.println("- " + m.getNombre() + " | Puntuación Total: " + m.calcularPuntuacionTotal());
+			}
+			System.out.println();
 			break;
 		}
 	}
