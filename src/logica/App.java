@@ -136,6 +136,9 @@ public class App {
 			}
 			System.out.println();
 			break;
+		default:
+			System.out.println("Opción inválida.\n");
+			break;
 		}
 	}
 
