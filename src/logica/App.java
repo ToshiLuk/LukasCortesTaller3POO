@@ -110,7 +110,7 @@ public class App {
 			break;
 		//Mostrar magos
 		case 4:
-			System.out.println("\n--- TODOS LOS MAGOS ---");
+			System.out.println("\n--- Todos los magos ---");
 			for (Mago m : sistema.getMagos()) {
 				System.out.print("- " + m.getNombre() + " | Hechizos: ");
 				for (Hechizo h : m.getHechizos()) {
@@ -122,6 +122,11 @@ public class App {
 			break;
 		//Hechizos con su puntuacion
 		case 5:
+			System.out.println("\n--- Hechizo y su puntuación ---");
+			for (Hechizo h : sistema.getHechizos()) {
+				System.out.println("- " + h.getNombre() + " | Puntuación: " + h.calcularPuntuacion());
+			}
+			System.out.println();
 			break;
 		//Magos con su puntcuacion
 		case 6:
